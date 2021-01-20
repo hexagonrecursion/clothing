@@ -1,4 +1,4 @@
-minetest.register_node("clothing:loom", {
+minetest.register_node("hades_clothing:loom", {
 	description = "Loom",
 	tiles = {
 		"clothing_loom_top.png",
@@ -61,13 +61,13 @@ minetest.register_node("clothing:loom", {
 			"label[7,3.5;Output:]"..
 			"label[0,0;Clothing Loom:]"..
 			"label[1.5,1.5;Hat]"..
-			"item_image_button[1.5,2;1,1;clothing:hat_grey;hat; ]"..
+			"item_image_button[1.5,2;1,1;hades_clothing:hat_grey;hat; ]"..
 			"label[4,1.5;Shirt]"..
-			"item_image_button[4,2;1,1;clothing:shirt_grey;shirt; ]"..
+			"item_image_button[4,2;1,1;hades_clothing:shirt_grey;shirt; ]"..
 			"label[1.5,3;Pants]"..
-			"item_image_button[1.5,3.5;1,1;clothing:pants_grey;pants; ]"..
+			"item_image_button[1.5,3.5;1,1;hades_clothing:pants_grey;pants; ]"..
 			"label[4,3;Cape]"..
-			"item_image_button[4,3.5;1,1;clothing:cape_grey;cape; ]"..
+			"item_image_button[4,3.5;1,1;hades_clothing:cape_grey;cape; ]"..
 			"list[current_player;main;1,7;8,4;]")
 		meta:set_string("infotext", "Loom")
 		local inv = meta:get_inventory()
@@ -84,16 +84,16 @@ minetest.register_node("clothing:loom", {
 		local qty = nil
 
 		if fields["hat"] then
-			output = "clothing:hat_"
+			output = "hades_clothing:hat_"
 			qty = "1"
 		elseif fields["shirt"] then
-			output = "clothing:shirt_"
+			output = "hades_clothing:shirt_"
 			qty = "1"
 		elseif fields["pants"] then
-			output = "clothing:pants_"
+			output = "hades_clothing:pants_"
 			qty = "1"
 		elseif fields["cape"] then
-			output = "clothing:cape_"
+			output = "hades_clothing:cape_"
 			qty = "1"
 		end
 
@@ -117,11 +117,22 @@ minetest.register_node("clothing:loom", {
 
 --Craft
 
-minetest.register_craft({
-	output = 'clothing:loom',
-	recipe = {
-		{'group:stick', 'default:pinewood', 'group:stick'},
-		{'group:stick', 'default:pinewood', 'group:stick'},
-		{'default:pinewood', "default:pinewood", 'default:pinewood'},
-	},
-})
+if minetest.get_modpath("hades_larch") then
+  minetest.register_craft({
+    output = 'hades_clothing:loom',
+    recipe = {
+      {'group:stick', 'larch:pinewood', 'group:stick'},
+      {'group:stick', 'larch:pinewood', 'group:stick'},
+      {'larch:pinewood', "larch:pinewood", 'larch:pinewood'},
+    },
+  })
+else
+  minetest.register_craft({
+    output = 'hades_clothing:loom',
+    recipe = {
+      {'group:stick', 'hades_trees:pale_wood', 'group:stick'},
+      {'group:stick', 'hades_trees:pale_wood', 'group:stick'},
+      {'hades_trees:pale_wood', "hades_trees:pale_wood", 'hades_trees:pale_wood'},
+    },
+  })
+end

@@ -27,25 +27,25 @@ local colors = {
 for color, hex in pairs(colors) do
 	local desc = color:gsub("%a", string.upper, 1)
 	desc = desc:gsub("_", " ")
-	minetest.register_craftitem("clothing:hat_"..color, {
+	minetest.register_craftitem("hades_clothing:hat_"..color, {
 		description = desc.." Cotton Hat",
 		inventory_image = "clothing_inv_hat.png^[multiply:#"..hex,
 		uv_image = "(clothing_uv_hat.png^[multiply:#"..hex..")",
 		groups = {clothing=1},
 	})
-	minetest.register_craftitem("clothing:shirt_"..color, {
+	minetest.register_craftitem("hades_clothing:shirt_"..color, {
 		description = desc.." Cotton Shirt",
 		inventory_image = "clothing_inv_shirt.png^[multiply:#"..hex,
 		uv_image = "(clothing_uv_shirt.png^[multiply:#"..hex..")",
 		groups = {clothing=1},
 	})
-	minetest.register_craftitem("clothing:pants_"..color, {
+	minetest.register_craftitem("hades_clothing:pants_"..color, {
 		description = desc.." Cotton Pants",
 		inventory_image = "clothing_inv_pants.png^[multiply:#"..hex,
 		uv_image = "(clothing_uv_pants.png^[multiply:#"..hex..")",
 		groups = {clothing=1},
 	})
-	minetest.register_craftitem("clothing:cape_"..color, {
+	minetest.register_craftitem("hades_clothing:cape_"..color, {
 		description = desc.." Cotton Cape",
 		inventory_image = "clothing_inv_cape.png^[multiply:#"..hex,
 		uv_image = "(clothing_uv_cape.png^[multiply:#"..hex..")",
