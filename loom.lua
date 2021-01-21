@@ -121,18 +121,18 @@ if minetest.get_modpath("hades_larch") then
   minetest.register_craft({
     output = 'hades_clothing:loom',
     recipe = {
-      {'group:stick', 'larch:pinewood', 'group:stick'},
-      {'group:stick', 'larch:pinewood', 'group:stick'},
-      {'larch:pinewood', "larch:pinewood", 'larch:pinewood'},
+      {'group:stick', 'larch:wood', 'group:stick'},
+      {'group:stick', 'larch:wood', 'group:stick'},
+      {'larch:wood', "larch:wood", 'larch:wood'},
     },
   })
 else
   minetest.register_craft({
     output = 'hades_clothing:loom',
     recipe = {
-      {'group:stick', 'hades_trees:pale_wood', 'group:stick'},
-      {'group:stick', 'hades_trees:pale_wood', 'group:stick'},
-      {'hades_trees:pale_wood', "hades_trees:pale_wood", 'hades_trees:pale_wood'},
+      {'group:stick', 'hades_trees:colwood_violet', 'group:stick'},
+      {'group:stick', 'hades_trees:colwood_violet', 'group:stick'},
+      {'hades_trees:colwood_violet', "hades_trees:colwood_violet", 'hades_trees:colwood_violet'},
     },
   })
 end
