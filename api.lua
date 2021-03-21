@@ -14,7 +14,9 @@ clothing = {
 	player_textures = {},
 }
 
--- CLothing callbacks
+clothing.translator = minetest.get_translator("clothing");
+
+-- Clothing callbacks
 
 clothing.register_on_update = function(self, func)
 	if type(func) == "function" then
@@ -60,7 +62,9 @@ clothing.set_player_clothing = function(self, player)
 		cape = {},
 	}
 
-	local clothing_meta = player:get_attribute("clothing:inventory")
+  local player_meta = player:get_meta();
+	--local clothing_meta = player:get_attribute("clothing:inventory")
+	local clothing_meta = player_meta:get_string("clothing:inventory")
 	local clothes = clothing_meta and minetest.deserialize(clothing_meta) or {}
 
 	local capes = {}
