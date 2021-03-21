@@ -163,7 +163,7 @@ spinning_machine:register_nodes(node_def, inactive_node, active_node)
 -------------------------
   
 spinning_machine:recipe_register_usage(
-  "clothing:yarn_spool_empthy",
+  "clothing:yarn_spool_empty",
   {
     outputs = {""},
     consumption_time = 30,

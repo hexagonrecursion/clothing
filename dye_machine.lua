@@ -60,7 +60,7 @@ selection_box_fill = {
 local S = clothing.translator;
 
 minetest.register_node("clothing:dye_machine_empty", {
-    description = "Empthy dye machine",
+    description = "Empty dye machine",
     paramtype2 = "facedir",
     groups = {cracky = 2,},
     legacy_facedir_simple = true,

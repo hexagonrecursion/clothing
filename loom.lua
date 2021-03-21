@@ -150,7 +150,7 @@ for color, data in pairs(clothing.colors) do
         inputs = {spool, spool,
                   spool, spool,
                  },
-        outputs = {{"clothing:yarn_spool_empthy 4", "clothing:fabric_"..color},},
+        outputs = {{"clothing:yarn_spool_empty 4", "clothing:fabric_"..color},},
         production_time = 30,
         consumption_step_size = 1,
       });
@@ -163,7 +163,7 @@ for color, data in pairs(clothing.colors) do
         inputs = {spool2, spool,
                   spool, spool2,
                  },
-        outputs = {{"clothing:yarn_spool_empthy 4", "clothing:fabric_"..color},},
+        outputs = {{"clothing:yarn_spool_empty 4", "clothing:fabric_"..color},},
         production_time = 30,
         consumption_step_size = 1,
       });

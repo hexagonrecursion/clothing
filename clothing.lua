@@ -23,7 +23,7 @@ local basic_colors = {
     color = S("red"),
     hex = "FF0000",
   },
-  yelow = {
+  yellow = {
     color = S("yellow"),
     hex = "FFEE00",
   },
@@ -92,6 +92,11 @@ end
 
 local pictures = {
   minetest = {
+    recipe = {"green","CLOTH","dark_green",
+              "brown","green","yellow",
+              "black","blue","grey",
+              },
+    production_time = 8*30,
     texture = "clothing_picture_minetest.png",
   },
 }

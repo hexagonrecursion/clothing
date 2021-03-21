@@ -113,7 +113,7 @@ sewing_table:register_nodes(node_def, inactive_node, active_node)
 -- Recipe Registration --
 -------------------------
   
-for color, hex in pairs(clothing.colors) do
+for color, data in pairs(clothing.colors) do
   local fabric = "clothing:fabric_"..color;
   sewing_table:recipe_register_input(
     "",
@@ -159,5 +159,44 @@ for color, hex in pairs(clothing.colors) do
       production_time = 30,
       consumption_step_size = 1,
     });
+
+  for picture, pic_data in pairs(clothing.pictures) do
+    local inputs = {};
+    local cloth_index = 2;
+    
+    for r_i, r_v in pairs(pic_data.recipe) do
+      if (r_v=="CLOTH") then
+        cloth_index = r_i;
+      elseif (r_v~="") then
+        if (clothing.basic_colors[r_v]==nil) then
+          minetest.log("error", "Use of undefined yarn color "..r_v..".");
+        end
+        inputs[r_i] = "clothing:yarn_spool_"..r_v;
+      else
+        inputs[r_i] = "";
+      end
+    end
+    
+    inputs[cloth_index] = "clothing:shirt_"..color;
+    sewing_table:recipe_register_input(
+      "",
+      {
+        inputs = table.copy(inputs),
+        outputs = {{"clothing:shirt_"..color.."_picture_"..picture}, },
+        production_time = pic_data.production_time,
+        consumption_step_size = 1,
+      });
+    
+    inputs[2] = "clothing:cape_"..color;
+    sewing_table:recipe_register_input(
+      "",
+      {
+        inputs = table.copy(inputs),
+        outputs = {"clothing:cape_"..color.."_picture_"..picture},
+        production_time = pic_data.production_time,
+        consumption_step_size = 1,
+      });
+  end
 end
+
 

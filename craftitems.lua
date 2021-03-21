@@ -1,25 +1,26 @@
 
 local S = clothing.translator;
 
-minetest.register_craftitem("clothing:yarn_spool_empthy", {
-  description = S("Empthy yarn spool"),
-  inventory_image = "clothing_yarn_spool_empthy.png",
+minetest.register_craftitem("clothing:yarn_spool_empty", {
+  description = S("Empty yarn spool"),
+  inventory_image = "clothing_yarn_spool_empty.png",
 });
 
 minetest.register_craftitem("clothing:bone_needle", {
   description = S("Bone needle"),
-  inventory_image = "clothing_yarn_spool_empthy.png",
+  inventory_image = "clothing_bone_needle.png",
 });
 
 for color, data in pairs(clothing.colors) do
-	local desc = data.color:gsub("%a", string.upper, 1);
+	local desc = data.color;
+  desc = desc:gsub("%a", string.upper, 1);
   desc = desc.." ";
   
   if (data.hex2==nil) then
     -- yarn
     minetest.register_craftitem("clothing:yarn_spool_"..color, {
       description = desc..S("yarn spool"),
-      inventory_image = "clothing_yarn_spool_empthy.png^(clothing_yarn_spool_fill.png^[multiply:#"..data.hex..")",
+      inventory_image = "clothing_yarn_spool_empty.png^(clothing_yarn_spool_fill.png^[multiply:#"..data.hex..")",
     });
   end
   
@@ -90,7 +91,7 @@ for color, data in pairs(clothing.colors) do
       inv_img = "("..inv_img.."^(clothing_inv_shirt_2.png^[multiply:#"..data.hex2.."))";
       uv_img = "("..uv_img.."^(clothing_uv_shirt_2.png^[multiply:#"..data.hex2.."))";
     end
-    minetest.register_craftitem("clothing:shirt_"..color.."_"..picture, {
+    minetest.register_craftitem("clothing:shirt_"..color.."_picture_"..picture, {
       description = desc..S("cotton shirt with picture"),
       inventory_image = inv_img.."^[combine:16x16:4,4="..pic_data.texture,
       uv_image = uv_img.."^[combine:64x64:20,39="..pic_data.texture,
@@ -102,7 +103,7 @@ for color, data in pairs(clothing.colors) do
       inv_img = "("..inv_img.."^(clothing_inv_cape_2.png^[multiply:#"..data.hex2.."))";
       uv_img = "("..uv_img.."^(clothing_uv_cape_2.png^[multiply:#"..data.hex2.."))";
     end
-    minetest.register_craftitem("clothing:cape_"..color.."_"..picture, {
+    minetest.register_craftitem("clothing:cape_"..color.."_picture_"..picture, {
       description = desc..S("cotton cape with picture"),
       inventory_image = inv_img.."^[combine:16x16:4,4="..pic_data.texture,
       uv_image = uv_img.."^[combine:64x32:56,22="..pic_data.texture,

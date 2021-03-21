@@ -1,6 +1,6 @@
 
 minetest.register_craft({
-	output = 'clothing:yarn_spool_empthy',
+	output = 'clothing:yarn_spool_empty',
 	recipe = {
 		{'group:stick'},
 		{'group:wood'},
