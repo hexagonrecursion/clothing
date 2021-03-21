@@ -4,51 +4,111 @@ if minetest.settings:get_bool("clothing_enable_craft") == false or
 end
 local modpath = minetest.get_modpath(minetest.get_current_modname())
 
-dofile(modpath.."/loom.lua")
+local S = clothing.translator;
 
-local colors = {
-	white = "FFFFFF",
-	grey = "C0C0C0",
-	black = "232323",
-	red = "FF0000",
-	yellow = "FFEE00",
-	green = "32CD32",
-	cyan = "00959D",
-	blue = "003376",
-	magenta = "D80481",
-	orange = "E0601A",
-	violet = "480080",
-	brown = "391A00",
-	pink = "FFA5A5",
-	dark_grey = "696969",
-	dark_green = "154F00",
+local basic_colors = {
+  white = {
+    color = S("white"),
+	  hex = "FFFFFF",
+  },
+  grey = {
+    color = S("grey"),
+	  hex = "C0C0C0",
+  },
+  black = {
+    color = S("black"),
+    hex = "232323",
+  },
+  red = {
+    color = S("red"),
+    hex = "FF0000",
+  },
+  yelow = {
+    color = S("yellow"),
+    hex = "FFEE00",
+  },
+  green = {
+    color = S("green"),
+    hex = "32CD32",
+  },
+  cyan = {
+    color = S("cyan"),
+    hex = "00959D",
+  },
+  blue = {
+    color = S("blue"),
+    hex = "003376",
+  },
+  magenta = {
+    color = S("magenta"),
+    hex = "D80481",
+  },
+  orange = {
+    color = S("orange"),
+    hex = "E0601A",
+  },
+  violet = {
+    color = S("violet"),
+    hex = "480080",
+  },
+  brown = {
+    color = S("brown"),
+    hex = "391A00",
+  },
+  pink = {
+    color = S("pink"),
+    hex = "FFA5A5",
+  },
+  dark_grey = {
+    color = S("dark grey"),
+    hex = "696969",
+  },
+  dark_green = {
+    color = S("dark green"),
+    hex = "154F00",
+  },
 }
 
-for color, hex in pairs(colors) do
-	local desc = color:gsub("%a", string.upper, 1)
-	desc = desc:gsub("_", " ")
-	minetest.register_craftitem("clothing:hat_"..color, {
-		description = desc.." Cotton Hat",
-		inventory_image = "clothing_inv_hat.png^[multiply:#"..hex,
-		uv_image = "(clothing_uv_hat.png^[multiply:#"..hex..")",
-		groups = {clothing=1},
-	})
-	minetest.register_craftitem("clothing:shirt_"..color, {
-		description = desc.." Cotton Shirt",
-		inventory_image = "clothing_inv_shirt.png^[multiply:#"..hex,
-		uv_image = "(clothing_uv_shirt.png^[multiply:#"..hex..")",
-		groups = {clothing=1},
-	})
-	minetest.register_craftitem("clothing:pants_"..color, {
-		description = desc.." Cotton Pants",
-		inventory_image = "clothing_inv_pants.png^[multiply:#"..hex,
-		uv_image = "(clothing_uv_pants.png^[multiply:#"..hex..")",
-		groups = {clothing=1},
-	})
-	minetest.register_craftitem("clothing:cape_"..color, {
-		description = desc.." Cotton Cape",
-		inventory_image = "clothing_inv_cape.png^[multiply:#"..hex,
-		uv_image = "(clothing_uv_cape.png^[multiply:#"..hex..")",
-		groups = {cape=1},
-	})
+local colors = table.copy(basic_colors);
+local colors2 = table.copy(basic_colors);
+
+for color, data in pairs(basic_colors) do
+  colors2[color] = nil;
+  for color2, data2 in pairs(colors2) do
+    if (data2~=nil) then
+      key = color.."_"..color2;
+      colors[key] = {
+          color = data.color.."-"..data2.color;
+          color1 = data.color,
+          color2 = data2.color,
+          key1 = color,
+          key2 = color2,
+          hex = data.hex,
+          hex2 = data2.hex,
+        }
+    end
+  end
 end
+
+local pictures = {
+  minetest = {
+    texture = "clothing_picture_minetest.png",
+  },
+}
+
+clothing.basic_colors = basic_colors;
+clothing.colors = colors;
+clothing.pictures = pictures;
+
+dofile(modpath.."/craftitems.lua")
+dofile(modpath.."/spinning_machine.lua")
+dofile(modpath.."/loom.lua")
+dofile(modpath.."/dirty_water.lua")
+dofile(modpath.."/dye_machine.lua")
+dofile(modpath.."/sewing_table.lua")
+dofile(modpath.."/crafting.lua")
+
+--clothing.basic_colors = nil;
+clothing.colors = nil;
+clothing.pictures = nil;
+
