@@ -8,6 +8,8 @@ clothing.sewing_table = appliances.appliance:new(
       node_name_active = "clothing:sewing_table_active",
       
       node_description = "Sewing table",
+      node_help = S("Sewing clothes from fabric and yarn.").."\n"..
+                  S("Powered by punching."),
       
       input_stack = "input",
       input_stack_size = 9,
@@ -62,7 +64,6 @@ end
 ----------
 
 local node_def = {
-    _tt_help = "Connect to power (LV).".."\n".."Overwrite bacteriums DNA.".."\n".."Use bottle of bacteriums and upgraded DNA.",
     paramtype2 = "facedir",
     groups = {cracky = 2,},
     legacy_facedir_simple = true,
@@ -112,28 +113,41 @@ sewing_table:register_nodes(node_def, inactive_node, active_node)
 -------------------------
 -- Recipe Registration --
 -------------------------
+
+if (clothing.have_unified) then
+  unified_inventory.register_craft_type("clothing_sewing", {
+      description = S("Sewing");
+      icon = "clothing_bone_needle.png";
+      width = 3,
+      height = 3,
+    })
+end
   
 for color, data in pairs(clothing.colors) do
   local fabric = "clothing:fabric_"..color;
+  local yarn = "clothing:yarn_spool_"..color;
+  if (data.key1) then
+    yarn = "clothing:yarn_spool_"..data.key1;
+  end
   sewing_table:recipe_register_input(
     "",
     {
       inputs = {fabric, fabric, fabric,
-                fabric, "", fabric,
+                fabric, yarn, fabric,
                 "", "", "",
                },
-      outputs = {"clothing:hat_"..color},
+      outputs = {{"clothing:hat_"..color,"clothing:yarn_spool_empty"}},
       production_time = 30,
       consumption_step_size = 1,
     });
   sewing_table:recipe_register_input(
     "",
     {
-      inputs = {fabric, "", fabric,
+      inputs = {fabric, yarn, fabric,
                 fabric, fabric, fabric,
                 fabric, fabric, fabric,
                },
-      outputs = {"clothing:shirt_"..color},
+      outputs = {{"clothing:shirt_"..color,"clothing:yarn_spool_empty"}},
       production_time = 60,
       consumption_step_size = 1,
     });
@@ -141,21 +155,21 @@ for color, data in pairs(clothing.colors) do
     "",
     {
       inputs = {fabric, fabric, fabric,
-                fabric, "", fabric,
+                fabric, yarn, fabric,
                 fabric, "", fabric,
                },
-      outputs = {"clothing:pants_"..color},
+      outputs = {{"clothing:pants_"..color,"clothing:yarn_spool_empty"}},
       production_time = 60,
       consumption_step_size = 1,
     });
   sewing_table:recipe_register_input(
     "",
     {
-      inputs = {fabric, fabric, "",
+      inputs = {fabric, fabric, yarn,
                 fabric, fabric, "",
                 fabric, fabric, "",
                },
-      outputs = {"clothing:cape_"..color},
+      outputs = {{"clothing:cape_"..color,"clothing:yarn_spool_empty"}},
       production_time = 30,
       consumption_step_size = 1,
     });
@@ -163,6 +177,7 @@ for color, data in pairs(clothing.colors) do
   for picture, pic_data in pairs(clothing.pictures) do
     local inputs = {};
     local cloth_index = 2;
+    local spools = 0;
     
     for r_i, r_v in pairs(pic_data.recipe) do
       if (r_v=="CLOTH") then
@@ -172,17 +187,20 @@ for color, data in pairs(clothing.colors) do
           minetest.log("error", "Use of undefined yarn color "..r_v..".");
         end
         inputs[r_i] = "clothing:yarn_spool_"..r_v;
+        spools = spools + 1;
       else
         inputs[r_i] = "";
       end
     end
+    
+    spools = ItemStack("clothing:yarn_spool_empty "..spools):to_string();
     
     inputs[cloth_index] = "clothing:shirt_"..color;
     sewing_table:recipe_register_input(
       "",
       {
         inputs = table.copy(inputs),
-        outputs = {{"clothing:shirt_"..color.."_picture_"..picture}, },
+        outputs = {{"clothing:shirt_"..color.."_picture_"..picture,spools}},
         production_time = pic_data.production_time,
         consumption_step_size = 1,
       });
@@ -192,11 +210,12 @@ for color, data in pairs(clothing.colors) do
       "",
       {
         inputs = table.copy(inputs),
-        outputs = {"clothing:cape_"..color.."_picture_"..picture},
+        outputs = {{"clothing:cape_"..color.."_picture_"..picture,spools}},
         production_time = pic_data.production_time,
         consumption_step_size = 1,
       });
   end
 end
 
+sewing_table:register_recipes("clothing_sewing", "")
 

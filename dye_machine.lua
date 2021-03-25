@@ -59,8 +59,12 @@ selection_box_fill = {
 
 local S = clothing.translator;
 
+local node_desc = S("Empty dye machine");
 minetest.register_node("clothing:dye_machine_empty", {
-    description = "Empty dye machine",
+    description = node_desc.."\n"..
+                  S("Fill with water and dye.").."\n"..
+                  S("Need time to colorize wool, fabric or yarn."),
+    short_description = node_desc,
     paramtype2 = "facedir",
     groups = {cracky = 2,},
     legacy_facedir_simple = true,
@@ -90,7 +94,7 @@ minetest.register_node("clothing:dye_machine_empty", {
       end,
   })
 minetest.register_node("clothing:dye_machine_water", {
-    description = "Dye machine filled with water",
+    description = S("Dye machine filled with water"),
     paramtype2 = "facedir",
     groups = {cracky = 2,},
     legacy_facedir_simple = true,
@@ -126,8 +130,11 @@ minetest.register_node("clothing:dye_machine_water", {
         end
       end,
   })
+local node_desc = S("Dye machine filled with dirty water");
 minetest.register_node("clothing:dye_machine_water_dirty", {
-    description = "Dye machine filled with dirty water",
+    description = node_desc.."\n"..
+                  S("Empty it by empty bucket."),
+    short_description = node_desc,
     paramtype2 = "facedir",
     groups = {cracky = 2,},
     legacy_facedir_simple = true,
@@ -175,6 +182,15 @@ minetest.register_node("clothing:dye_machine_water_dirty", {
       end,
   })
 
+if (clothing.have_unified) then
+  unified_inventory.register_craft_type("clothing_dying", {
+      description = S("Dying");
+      icon = "clothing_recipe_dying.png";
+      width = 1,
+      height = 1,
+    })
+end
+
 for color, data in pairs(clothing.basic_colors) do
   dye_machine_key = "dye_machine_"..color;
   
@@ -183,7 +199,9 @@ for color, data in pairs(clothing.basic_colors) do
         node_name_inactive = "clothing:"..dye_machine_key,
         node_name_active = "clothing:"..dye_machine_key.."_active",
         
-        node_description = "Dye machine",
+        node_description = S("Dye machine"),
+        node_help = S("Colorize white wool, yarn, fabric.").."\n"..
+                    S("Need time to colorize."),
         
         use_stack_size = 0,
         output_stack_size = 1,
@@ -309,17 +327,24 @@ for color, data in pairs(clothing.basic_colors) do
   -------------------------
   -- Recipe Registration --
   -------------------------
-    
+  
+  if clothing.have_wool then
+    dye_machine:recipe_register_input(
+      "wool:white",
+      {
+        inputs = 1,
+        outputs = {"wool:"..color},
+        production_time = 45,
+        consumption_step_size = 1,
+      });
+    minetest.clear_craft({
+        type = "shapeless",
+        --output = "wool:"..color,
+        recipe = {"group:dye,color_"..color, "group:wool"},
+      });
+  end
   dye_machine:recipe_register_input(
-    "wool:white",
-    {
-      inputs = 1,
-      outputs = {"wool:"..color},
-      production_time = 45,
-      consumption_step_size = 1,
-    });
-  dye_machine:recipe_register_input(
-    "clothing:yarn_white",
+    "clothing:yarn_spool_white",
     {
       inputs = 1,
       outputs = {"clothing:yarn_spool_"..color},
@@ -334,5 +359,8 @@ for color, data in pairs(clothing.basic_colors) do
       production_time = 30,
       consumption_step_size = 1,
     });
+  
+  dye_machine:register_recipes("clothing_dying", "")
 end
+
 

@@ -8,11 +8,11 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'clothing:bone_needle',
-	recipe = {
-		{'group:bone'},
-		{'group:bone'},
-	},
+  output = 'clothing:bone_needle',
+  recipe = {
+    {'group:bone'},
+    {'group:bone'},
+  },
 })
 
 minetest.register_craft({
@@ -34,7 +34,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'clothing:dye_machine',
+	output = 'clothing:dye_machine_empty',
 	recipe = {
 		{'group:wood', 'group:stick', 'group:wood'},
 		{'group:wood', 'group:stick', 'group:wood'},
@@ -50,4 +50,37 @@ minetest.register_craft({
 		{'group:wood', 'clothing:bone_needle', 'group:wood'},
 	},
 })
+
+if clothing.have_farming then
+  minetest.clear_craft({
+    --output = "farming:string 2"
+    recipe = {
+      {"farming:cotton"},
+      {"farming:cotton"},
+    },
+  })
+  minetest.register_craft({
+    output = "farming:string",
+    recipe = {
+      {"clothing:yarn_spool_white"},
+      {"clothing:yarn_spool_white"},
+    },
+    replacements = {
+      {"clothing:yarn_spool_white", "clothing:yarn_spool_empty"},
+      {"clothing:yarn_spool_white", "clothing:yarn_spool_empty"},
+    },
+  })
+end
+
+if minetest.registered_items["farming:hemp_fibre"] then
+  minetest.clear_craft({
+    --output = "farming:cotton 3"
+    recipe = {
+      {"clothing:hemp_fibre"},
+      {"clothing:hemp_fibre"},
+      {"clothing:hemp_fibre"},
+    },
+  })
+  
+end
 

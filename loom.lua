@@ -7,7 +7,9 @@ clothing.loom = appliances.appliance:new(
       node_name_inactive = "clothing:loom",
       node_name_active = "clothing:loom_active",
       
-      node_description = "Loom",
+      node_description = S("Loom"),
+      node_help = S("Weaving fabric from yarn.").."\n"..
+                  S("Powered by punching."),
       
       input_stack = "input",
       input_stack_size = 4,
@@ -62,7 +64,6 @@ end
 ----------
 
 local node_def = {
-    _tt_help = "Connect to power (LV).".."\n".."Overwrite bacteriums DNA.".."\n".."Use bottle of bacteriums and upgraded DNA.",
     paramtype2 = "facedir",
     groups = {cracky = 2,},
     legacy_facedir_simple = true,
@@ -140,6 +141,15 @@ loom:register_nodes(node_def, inactive_node, active_node)
 -------------------------
 -- Recipe Registration --
 -------------------------
+
+if (clothing.have_unified) then
+  unified_inventory.register_craft_type("clothing_weaving", {
+      description = S("Weaving");
+      icon = "clothing_recipe_weaving.png";
+      width = 2,
+      height = 2,
+    })
+end
   
 for color, data in pairs(clothing.colors) do
   if (data.hex2==nil) then
@@ -150,7 +160,7 @@ for color, data in pairs(clothing.colors) do
         inputs = {spool, spool,
                   spool, spool,
                  },
-        outputs = {{"clothing:yarn_spool_empty 4", "clothing:fabric_"..color},},
+        outputs = {{"clothing:fabric_"..color, "clothing:yarn_spool_empty 4"},},
         production_time = 30,
         consumption_step_size = 1,
       });
@@ -163,9 +173,11 @@ for color, data in pairs(clothing.colors) do
         inputs = {spool2, spool,
                   spool, spool2,
                  },
-        outputs = {{"clothing:yarn_spool_empty 4", "clothing:fabric_"..color},},
+        outputs = {{"clothing:fabric_"..color,"clothing:yarn_spool_empty 4"},},
         production_time = 30,
         consumption_step_size = 1,
       });
   end
 end
+
+loom:register_recipes("clothing_weaving", "")

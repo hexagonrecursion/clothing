@@ -14,6 +14,12 @@ clothing = {
 	player_textures = {},
 }
 
+clothing.have_wool = minetest.get_modpath("wool")~=nil;
+clothing.have_farming = minetest.get_modpath("farming")~=nil;
+clothing.have_bonemeal = minetest.get_modpath("bonemeal")~=nil;
+clothing.have_skeletons = minetest.get_modpath("skeletons")~=nil;
+clothing.have_unified = minetest.get_modpath("unified_inventory")~=nil;
+
 clothing.translator = minetest.get_translator("clothing");
 
 -- Clothing callbacks

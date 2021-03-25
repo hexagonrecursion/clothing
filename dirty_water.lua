@@ -97,7 +97,8 @@ bucket.register_liquid(
 	"clothing:dirty_water_flowing",
 	"clothing:bucket_dirty_water",
 	"clothing_bucket_dirty_water.png",
-	S("Dirty water bucket"),
+	S("Dirty water bucket").."\n"..
+  S("Put dirty water on gravel and wait for cleaning it."),
 	{tool = 1}
 )
 
