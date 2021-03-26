@@ -182,14 +182,12 @@ minetest.register_node("clothing:dye_machine_water_dirty", {
       end,
   })
 
-if (clothing.have_unified) then
-  unified_inventory.register_craft_type("clothing_dying", {
-      description = S("Dying");
-      icon = "clothing_recipe_dying.png";
-      width = 1,
-      height = 1,
-    })
-end
+appliances.register_craft_type("clothing_dying", {
+    description = S("Dying"),
+    icon = "clothing_recipe_dying.png",
+    width = 1,
+    height = 1,
+  })
 
 for color, data in pairs(clothing.basic_colors) do
   dye_machine_key = "dye_machine_"..color;

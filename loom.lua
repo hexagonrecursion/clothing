@@ -13,6 +13,7 @@ clothing.loom = appliances.appliance:new(
       
       input_stack = "input",
       input_stack_size = 4,
+      input_stack_width = 2,
       use_stack = "input",
       use_stack_size = 0,
       have_usage = false,
@@ -142,14 +143,12 @@ loom:register_nodes(node_def, inactive_node, active_node)
 -- Recipe Registration --
 -------------------------
 
-if (clothing.have_unified) then
-  unified_inventory.register_craft_type("clothing_weaving", {
-      description = S("Weaving");
-      icon = "clothing_recipe_weaving.png";
-      width = 2,
-      height = 2,
-    })
-end
+appliances.register_craft_type("clothing_weaving", {
+    description = S("Weaving"),
+    icon = "clothing_recipe_weaving.png",
+    width = 2,
+    height = 2,
+  })
   
 for color, data in pairs(clothing.colors) do
   if (data.hex2==nil) then

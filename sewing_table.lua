@@ -13,6 +13,7 @@ clothing.sewing_table = appliances.appliance:new(
       
       input_stack = "input",
       input_stack_size = 9,
+      input_stack_width = 3,
       use_stack = "input",
       use_stack_size = 0,
       have_usage = false,
@@ -114,14 +115,12 @@ sewing_table:register_nodes(node_def, inactive_node, active_node)
 -- Recipe Registration --
 -------------------------
 
-if (clothing.have_unified) then
-  unified_inventory.register_craft_type("clothing_sewing", {
-      description = S("Sewing");
-      icon = "clothing_bone_needle.png";
-      width = 3,
-      height = 3,
-    })
-end
+appliances.register_craft_type("clothing_sewing", {
+    description = S("Sewing"),
+    icon = "clothing_bone_needle.png",
+    width = 3,
+    height = 3,
+  })
   
 for color, data in pairs(clothing.colors) do
   local fabric = "clothing:fabric_"..color;

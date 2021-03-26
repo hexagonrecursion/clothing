@@ -137,19 +137,17 @@ spinning_machine:register_nodes(node_def, inactive_node, active_node)
 -- Recipe Registration --
 -------------------------
 
-if (clothing.have_unified) then
-  unified_inventory.register_craft_type("clothing_spinning", {
-      description = S("Spinning");
-      icon = "clothing_recipe_spinning.png";
-      width = 1,
-      height = 1,
-    })
-  unified_inventory.register_craft_type("clothing_spinning_use", {
-      description = S("Spinning use");
-      width = 1,
-      height = 1,
-    })
-end
+appliances.register_craft_type("clothing_spinning", {
+    description = S("Spinning"),
+    icon = "clothing_recipe_spinning.png",
+    width = 1,
+    height = 1,
+  })
+appliances.register_craft_type("clothing_spinning_use", {
+    description = S("Spinning use"),
+    width = 1,
+    height = 1,
+  })
   
 spinning_machine:recipe_register_usage(
   "clothing:yarn_spool_empty",
