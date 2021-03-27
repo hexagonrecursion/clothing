@@ -180,3 +180,19 @@ for color, data in pairs(clothing.colors) do
 end
 
 loom:register_recipes("clothing_weaving", "")
+
+minetest.register_lbm({
+    label = "Upgrade old clothing loom.",
+    name = "clothing:upgrade_loom",
+    nodenames = {"clothig:loom"},
+    run_at_every_load = false,
+    action = function(pos, node)
+        local meta = minetest.get_meta(pos);
+        local inv = meta:get_inventory();
+        if (inv:get_size("input")==1) then
+          -- old loom detected
+          inv:set_size("input", 4);
+          loom:update_formspec(meta, 0, 1, 0, 1);
+        end
+      end,
+  });
