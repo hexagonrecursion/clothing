@@ -1,6 +1,8 @@
-if minetest.settings:get_bool("clothing_enable_craft") == false or
-		not minetest.get_modpath("wool") then
-	return
+if (minetest.settings:get_bool("clothing_enable_craft") == false) then
+  if (not minetest.get_modpath("appliances")) then
+    minetest.log("error", "Cannot register crafts and machines because of missing mod appliances.")
+	  return
+  end
 end
 local modpath = minetest.get_modpath(minetest.get_current_modname())
 
