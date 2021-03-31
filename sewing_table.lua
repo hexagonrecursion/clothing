@@ -7,7 +7,7 @@ clothing.sewing_table = appliances.appliance:new(
       node_name_inactive = "clothing:sewing_table",
       node_name_active = "clothing:sewing_table_active",
       
-      node_description = "Sewing table",
+      node_description = S("Sewing table"),
       node_help = S("Sewing clothes from fabric and yarn.").."\n"..
                   S("Powered by punching."),
       
@@ -25,6 +25,8 @@ clothing.sewing_table = appliances.appliance:new(
             run_speed = 1,
           },
       },
+      
+      have_tubes = false,
     }
   );
 

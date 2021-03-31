@@ -46,8 +46,8 @@ minetest.register_craft({
 	output = 'clothing:sewing_table',
 	recipe = {
 		{'group:wood', 'group:wood', 'group:wood'},
-		{'group:wood', 'clothing:bone_needle', 'group:wood'},
-		{'group:wood', 'clothing:bone_needle', 'group:wood'},
+		{'group:stick', 'clothing:bone_needle', 'group:stick'},
+		{'group:stick', 'clothing:bone_needle', 'group:stick'},
 	},
 })
 
@@ -76,9 +76,9 @@ if minetest.registered_items["farming:hemp_fibre"] then
   minetest.clear_craft({
     --output = "farming:cotton 3"
     recipe = {
-      {"clothing:hemp_fibre"},
-      {"clothing:hemp_fibre"},
-      {"clothing:hemp_fibre"},
+      {"farming:hemp_fibre"},
+      {"farming:hemp_fibre"},
+      {"farming:hemp_fibre"},
     },
   })
   
