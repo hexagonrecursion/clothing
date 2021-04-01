@@ -11,6 +11,10 @@ if minetest.get_modpath("inventory_plus") then
 		"button[6,0;2,0.5;main;Back]"
 elseif minetest.get_modpath("unified_inventory") and
 		not unified_inventory.sfinv_compat_layer then
+  local S = clothing.translator
+  local F = minetest.formspec_escape
+  local ui = unified_inventory
+  
 	clothing.inv_mod = "unified_inventory"
 	unified_inventory.register_button("clothing", {
 		type = "image",
@@ -18,12 +22,17 @@ elseif minetest.get_modpath("unified_inventory") and
 	})
 	unified_inventory.register_page("clothing", {
 		get_formspec = function(player, perplayer_formspec)
-			local fy = perplayer_formspec.formspec_y
+      local fy = perplayer_formspec.form_header_y + 0.5
+      local gridx = perplayer_formspec.std_inv_x
+      local gridy = 0.6
 			local name = player:get_player_name()
-			local formspec = "background[0.06,"..fy..
-				";7.92,7.52;clothing_ui_form.png]"..
-				"label[0,0;Clothing]"..
-				"list[detached:"..name.."_clothing;clothing;0,"..fy..";2,3;]"..
+      local formspec = perplayer_formspec.standard_inv_bg..
+        perplayer_formspec.standard_inv..
+        ui.make_inv_img_grid(gridx, gridy, 2, 3)..
+        string.format("label[%f,%f;%s]",
+          perplayer_formspec.form_header_x, perplayer_formspec.form_header_y, F(S("Clothing")))..
+        string.format("list[detached:%s_clothing;clothing;%f,%f;2,3;]",
+				name, gridx + ui.list_img_offset, gridy + ui.list_img_offset) ..
 				"listring[current_player;main]"..
 				"listring[detached:"..name.."_clothing;clothing]"
 			return {formspec=formspec}
@@ -77,17 +86,19 @@ local function save_clothing_metadata(player, clothing_inv)
 			is_empty = false
 		end
 	end
+  local player_meta = player:get_meta();
 	if is_empty then
-		player:set_attribute("clothing:inventory", nil)
+		player_meta:set_string("clothing:inventory", nil)
 	else
-		player:set_attribute("clothing:inventory",
+		player_meta:set_string("clothing:inventory",
 			minetest.serialize(clothes))
 	end
 end
 
 local function load_clothing_metadata(player, clothing_inv)
 	local player_inv = player:get_inventory()
-	local clothing_meta = player:get_attribute("clothing:inventory")
+  local player_meta = player:get_meta();
+	local clothing_meta = player_meta:get_string("clothing:inventory")
 	local clothes = clothing_meta and minetest.deserialize(clothing_meta) or {}
 	local dirty_meta = false
 	if not clothing_meta then

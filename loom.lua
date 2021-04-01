@@ -1,138 +1,199 @@
-minetest.register_node("hades_clothing:loom", {
-	description = "Loom",
-	tiles = {
-		"clothing_loom_top.png",
-		"clothing_loom_bottom.png",
-		"clothing_loom_side2.png",
-		"clothing_loom_side1.png",
-		"clothing_loom_front.png",
-		"clothing_loom_front.png",
-	},
-	drawtype = "nodebox",
-	paramtype = "light",
-	paramtype2 = "facedir",
-	groups = {choppy=2, oddly_breakable_by_hand=1},
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.5, -0.5, -0.125, -0.375, 0.5, 0.1875}, -- NodeBox1
-			{0.375, -0.5, -0.125, 0.5, 0.5, 0.1875}, -- NodeBox3
-			{-0.375, -0.5, -0.5, 0.375, -0.4375, 0.5}, -- NodeBox4
-			{-0.5, 0, -0.125, 0.5, 0.0625, 0.1875}, -- NodeBox5
-			{-0.5, 0.3125, 0.1875, 0.5, 0.5, 0.25}, -- NodeBox6
-			{-0.5, 0.3125, -0.1875, 0.5, 0.5, -0.125}, -- NodeBox7
-			{-0.375, -0.1875, -0.5, -0.3125, -0.125, 0.5}, -- NodeBox8
-			{0.3125, -0.1875, -0.5, 0.375, -0.125, 0.5}, -- NodeBox9
-			{-0.4375, -0.1875, -0.5, 0.4375, -0.125, -0.4375}, -- NodeBox10
-			{-0.4375, -0.1875, 0.4375, 0.4375, -0.125, 0.5}, -- NodeBox11
-			{-0.375, -0.5, 0.375, -0.3125, -0.125, 0.4375}, -- NodeBox12
-			{0.3125, -0.5, 0.375, 0.375, -0.125, 0.4375}, -- NodeBox13
-			{-0.375, -0.5, -0.4375, -0.3125, -0.125, -0.375}, -- NodeBox14
-			{0.3125, -0.5, -0.4375, 0.375, -0.125, -0.375}, -- NodeBox15
-			{-0.3125, -0.4375, -0.25, 0.3125, 0, 0.25}, -- NodeBox16
-		}
-	},
-	selection_box = {
-		type = "fixed",
-		fixed = {
-			{-0.5,-0.5,-0.5,0.5,0.5,0.5}
-		},
-	},
-	after_place_node = function(pos, placer)
-		local meta = minetest.env:get_meta(pos)
-		meta:set_string("owner", (placer:get_player_name() or ""))
-		meta:set_string("infotext", "Loom (owned by " .. (placer:get_player_name() or "") .. ")")
-	end,
-	can_dig = function(pos,player)
-		local meta = minetest.env:get_meta(pos)
-		local inv = meta:get_inventory()
-		if not inv:is_empty("input") or not inv:is_empty("output") then
-			return false
-		end
-		return true
-	end,
-	on_construct = function(pos)
-		local meta = minetest.env:get_meta(pos)
-		meta:set_string("formspec", "invsize[10,11;]"..
-			"background[-0.15,-0.25;10.40,11.75;clothing_loom_background.png]"..
-			"list[current_name;input;7,2;1,1;]"..
-			"list[current_name;output;7,4;1,1;]"..
-			"label[7,1.5;Input Wool:]"..
-			"label[7,3.5;Output:]"..
-			"label[0,0;Clothing Loom:]"..
-			"label[1.5,1.5;Hat]"..
-			"item_image_button[1.5,2;1,1;hades_clothing:hat_grey;hat; ]"..
-			"label[4,1.5;Shirt]"..
-			"item_image_button[4,2;1,1;hades_clothing:shirt_grey;shirt; ]"..
-			"label[1.5,3;Pants]"..
-			"item_image_button[1.5,3.5;1,1;hades_clothing:pants_grey;pants; ]"..
-			"label[4,3;Cape]"..
-			"item_image_button[4,3.5;1,1;hades_clothing:cape_grey;cape; ]"..
-			"list[current_player;main;1,7;8,4;]")
-		meta:set_string("infotext", "Loom")
-		local inv = meta:get_inventory()
-		inv:set_size("input", 1)
-		inv:set_size("output", 1)
-	end,
-	on_receive_fields = function(pos, formname, fields, sender)
-		local meta = minetest.env:get_meta(pos)
-		local inv = meta:get_inventory()
-		if inv:is_empty("input") then
-			return
-		end
-		local output = nil
-		local qty = nil
+-- loom
 
-		if fields["hat"] then
-			output = "hades_clothing:hat_"
-			qty = "1"
-		elseif fields["shirt"] then
-			output = "hades_clothing:shirt_"
-			qty = "1"
-		elseif fields["pants"] then
-			output = "hades_clothing:pants_"
-			qty = "1"
-		elseif fields["cape"] then
-			output = "hades_clothing:cape_"
-			qty = "1"
-		end
+local S = clothing.translator;
 
-		if output and qty then
-			local inputstack = inv:get_stack("input", 1)
-			local outputstack = inv:get_stack("output", 1)
-			local woolcol = inputstack:get_name()
-			if woolcol then
-				local color = woolcol:gsub("wool:", "")
-				local stack = output..color.." "..qty
-				if minetest.registered_items[output..color] and
-						inv:room_for_item("output", stack) then
-					inv:add_item("output", stack)
-					inputstack:take_item()
-					inv:set_stack("input", 1, inputstack)
-				end
-			end
-		end
-	end,
-})
+clothing.loom = appliances.appliance:new(
+    {
+      node_name_inactive = "hades_clothing:loom",
+      node_name_active = "hades_clothing:loom_active",
+      
+      node_description = S("Loom"),
+      node_help = S("Weaving fabric from yarn.").."\n"..
+                  S("Powered by punching."),
+      
+      input_stack = "input",
+      input_stack_size = 4,
+      input_stack_width = 2,
+      use_stack = "input",
+      use_stack_size = 0,
+      have_usage = false,
+      
+      
+      need_water = false,
+      power_data = {
+        ["punch"] = {
+            run_speed = 1,
+          },
+      },
+    }
+  );
 
---Craft
+local loom = clothing.loom;
 
-if minetest.get_modpath("hades_larch") then
-  minetest.register_craft({
-    output = 'hades_clothing:loom',
-    recipe = {
-      {'group:stick', 'larch:wood', 'group:stick'},
-      {'group:stick', 'larch:wood', 'group:stick'},
-      {'larch:wood', "larch:wood", 'larch:wood'},
-    },
-  })
-else
-  minetest.register_craft({
-    output = 'hades_clothing:loom',
-    recipe = {
-      {'group:stick', 'hades_trees:colwood_violet', 'group:stick'},
-      {'group:stick', 'hades_trees:colwood_violet', 'group:stick'},
-      {'hades_trees:colwood_violet', "hades_trees:colwood_violet", 'hades_trees:colwood_violet'},
-    },
-  })
+--------------
+-- Formspec --
+--------------
+
+function loom:get_formspec(meta, production_percent, consumption_percent)
+  local progress = "image[5.1,1;4,1.5;appliances_production_progress_bar.png^[transformR270]]";
+  if production_percent then
+    progress = "image[5.1,1;4,1.5;appliances_production_progress_bar.png^[lowpart:" ..
+            (production_percent) ..
+            ":appliances_production_progress_bar_full.png^[transformR270]]";
+  end
+  
+  local formspec =  "formspec_version[3]" .. "size[12.75,9.5]" ..
+                    "background[-1.25,-1.25;15,11;appliances_appliance_formspec.png]" ..
+                    progress..
+                    "list[current_player;main;1.5,4;8,4;]" ..
+                    "list[context;input;1.5,0.75;2,2;]" ..
+                    "list[context;output;9.75,0.75;2,2;]" ..
+                    "listring[current_player;main]" ..
+                    "listring[context;input]" ..
+                    "listring[current_player;main]" ..
+                    "listring[context;output]" ..
+                    "listring[current_player;main]";
+  return formspec;
 end
+
+--------------------
+-- Node callbacks --
+--------------------
+
+----------
+-- Node --
+----------
+
+local node_def = {
+    paramtype2 = "facedir",
+    groups = {cracky = 2,},
+    legacy_facedir_simple = true,
+    is_ground_content = false,
+    sounds = hades_sounds.node_sound_wood_defaults(),
+    drawtype = "mesh",
+    -- selection box {x=0, y=0, z=0}
+    selection_box = {
+      type = "fixed",
+      fixed = {
+        {-0.375,-0.5,-0.5,0.375,-0.4375,0.5},
+        {-0.375,-0.4375,-0.4375,-0.3125,-0.125,-0.375},
+        {0.3125,-0.4375,-0.4375,0.375,-0.125,-0.375},
+        {-0.375,-0.1875,-0.375,-0.3125,-0.125,0.5},
+        {0.3125,-0.1875,-0.375,0.375,-0.125,0.5},
+        {-0.375,-0.375,-0.25,0.375,-0.1875,0.25},
+        {-0.3125,-0.1875,-0.25,0.3125,-0.125,0.25},
+        {-0.3125,-0.125,-0.25,0.3125,0.0,0.25},
+        {-0.5,-0.5,-0.125,-0.375,0.5,0.1875},
+        {0.375,-0.5,-0.125,0.5,0.5,0.1875},
+        {-0.375,0.0,-0.125,0.375,0.0625,0.1875},
+        {-0.375,-0.4375,0.375,-0.3125,-0.1875,0.4375},
+        {0.3125,-0.4375,0.375,0.375,-0.1875,0.4375},
+        {-0.4375,-0.1875,0.4375,-0.375,-0.125,0.5},
+        {-0.3125,-0.1875,0.4375,0.3125,-0.125,0.5},
+        {0.375,-0.1875,0.4375,0.4375,-0.125,0.5},
+        -- 
+        {-0.4375,-0.1875,-0.5,0.4375,-0.125,-0.4375},
+        {-0.5,0.3125,-0.1875,0.5,0.5,-0.125},
+        {-0.5,0.1875,0.1875,0.5,0.375,0.25},
+      },
+    },
+    sunlight_propagates = true,
+  }
+local inactive_node = {
+    tiles = {
+      "clothing_loom_wood.png",
+      "clothing_loom_black.png",
+      "clothing_loom_front.png",
+      "clothing_loom_top.png",
+    },
+    mesh = "clothing_loom.obj",
+  }
+local active_node = {
+    tiles = {
+      "clothing_loom_wood.png",
+      "clothing_loom_black.png",
+      {
+        image = "clothing_loom_front_active.png",
+        backface_culling = true,
+        animation = {
+          type = "vertical_frames",
+          aspect_w = 16,
+          aspect_h = 16,
+          length = 2,
+        }
+      },
+      {
+        image = "clothing_loom_top_active.png",
+        backface_culling = true,
+        animation = {
+          type = "vertical_frames",
+          aspect_w = 16,
+          aspect_h = 16,
+          length = 2,
+        }
+      },
+    },
+    use_texture_alpha = "clip",
+    mesh = "clothing_loom_active.obj",
+  }
+
+loom:register_nodes(node_def, inactive_node, active_node)
+
+-------------------------
+-- Recipe Registration --
+-------------------------
+
+appliances.register_craft_type("clothing_weaving", {
+    description = S("Weaving"),
+    icon = "clothing_recipe_weaving.png",
+    width = 2,
+    height = 2,
+  })
+  
+for color, data in pairs(clothing.colors) do
+  if (data.hex2==nil) then
+    local spool = "hades_clothing:yarn_spool_"..color;
+    loom:recipe_register_input(
+      "",
+      {
+        inputs = {spool, spool,
+                  spool, spool,
+                 },
+        outputs = {{"hades_clothing:fabric_"..color, "hades_clothing:yarn_spool_empty 4"},},
+        production_time = 30,
+        consumption_step_size = 1,
+      });
+  else
+    local spool = "hades_clothing:yarn_spool_"..data.key1;
+    local spool2 = "hades_clothing:yarn_spool_"..data.key2;
+    loom:recipe_register_input(
+      "",
+      {
+        inputs = {spool2, spool,
+                  spool, spool2,
+                 },
+        outputs = {{"hades_clothing:fabric_"..color,"hades_clothing:yarn_spool_empty 4"},},
+        production_time = 30,
+        consumption_step_size = 1,
+      });
+  end
+end
+
+loom:register_recipes("clothing_weaving", "")
+
+minetest.register_lbm({
+    label = "Upgrade old clothing loom.",
+    name = "hades_clothing:upgrade_loom",
+    nodenames = {"hades_clothing:loom"},
+    run_at_every_load = false,
+    action = function(pos, node)
+        local meta = minetest.get_meta(pos);
+        local inv = meta:get_inventory();
+        if (inv:get_size("input")==1) then
+          -- old loom detected
+          inv:set_size("input", 4);
+          inv:set_size("output", 4);
+          loom:update_formspec(meta, 0, 1, 0, 1);
+        end
+      end,
+  });
