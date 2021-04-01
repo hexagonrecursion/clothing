@@ -25,6 +25,8 @@ clothing.loom = appliances.appliance:new(
             run_speed = 1,
           },
       },
+      
+      have_tubes = false,
     }
   );
 

@@ -203,7 +203,6 @@ for color, data in pairs(clothing.basic_colors) do
         use_stack_size = 0,
         output_stack_size = 1,
         have_usage = false,
-        have_tubes = false,
         
         need_water = false,
         power_data = {
@@ -211,11 +210,13 @@ for color, data in pairs(clothing.basic_colors) do
               run_speed = 1,
             },
         },
+        
+        have_tubes = false,
       }
     );
 
   local dye_machine = clothing[dye_machine_key];
-
+  
   --------------
   -- Formspec --
   --------------

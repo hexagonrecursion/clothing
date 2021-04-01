@@ -57,8 +57,8 @@ minetest.register_craft({
 	output = 'hades_clothing:sewing_table',
 	recipe = {
 		{'group:wood', 'group:wood', 'group:wood'},
-		{'group:wood', 'hades_clothing:bone_needle', 'group:wood'},
-		{'group:wood', 'hades_clothing:bone_needle', 'group:wood'},
+		{'group:stick', 'hades_clothing:bone_needle', 'group:stick'},
+		{'group:stick', 'hades_clothing:bone_needle', 'group:stick'},
 	},
 })
 

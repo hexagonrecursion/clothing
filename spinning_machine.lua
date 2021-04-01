@@ -12,11 +12,14 @@ clothing.spinning_machine = appliances.appliance:new(
                   S("Powered by punching."),
       
       need_water = false,
+      
       power_data = {
         ["punch"] = {
             run_speed = 1,
           },
       },
+      
+      have_tubes = false,
     }
   );
 
@@ -144,7 +147,8 @@ appliances.register_craft_type("clothing_spinning", {
     height = 1,
   })
 appliances.register_craft_type("clothing_spinning_use", {
-    description = S("Spinning use"),
+    description = S("Use for spinning"),
+    icon = "clothing_recipe_spinning.png",
     width = 1,
     height = 1,
   })

@@ -1,6 +1,8 @@
-if minetest.settings:get_bool("clothing_enable_craft") == false or
-		not minetest.get_modpath("wool") then
-	return
+if (minetest.settings:get_bool("clothing_enable_craft") == false) then
+  if (not minetest.get_modpath("appliances")) then
+    minetest.log("error", "Cannot register crafts and machines because of missing mod appliances.")
+	  return
+  end
 end
 local modpath = minetest.get_modpath(minetest.get_current_modname())
 
@@ -110,6 +112,9 @@ dofile(modpath.."/spinning_machine.lua")
 dofile(modpath.."/loom.lua")
 dofile(modpath.."/dirty_water.lua")
 dofile(modpath.."/dye_machine.lua")
+if minetest.get_modpath("hades_skinsdb") then
+  dofile(modpath.."/mannequin.lua")
+end
 dofile(modpath.."/sewing_table.lua")
 dofile(modpath.."/crafting.lua")
 
