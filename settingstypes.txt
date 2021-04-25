@@ -1,4 +1,0 @@
-
-# Enable clothing crafting
-clothing_enable_craft (Enable clothing crafting) bool true
-

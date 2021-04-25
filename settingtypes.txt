@@ -1,0 +1,7 @@
+
+# Enable clothing crafting
+clothing_enable_craft (Enable clothing crafting) bool true
+
+# Enable clothes register when register craft is disabled
+clothing_register_clothes (Enable register clothes) bool true
+
