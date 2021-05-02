@@ -140,29 +140,37 @@ minetest.register_abm({
     end,
 });
 
-minetest.register_abm({
-  label = "Mixing water and dirty water",
-  nodenames = {"hades_core:water_source"},
-  neighbors = {"hades_clothing:dirty_water_source"},
-  interval = 5,
-  chance = 5, 
-  action = function(pos, node) 
-      node.name = "hades_clothing:dirty_water_source";
-      minetest.set_node(pos, node);
-    end,
-});
+local random_gen = PcgRandom(os.clock())
 
-minetest.register_abm({
-  label = "Mixing water and flowing dirty water",
-  nodenames = {"hades_core:water_source"},
-  neighbors = {"hades_clothing:dirty_water_flowing"},
-  interval = 10,
-  chance = 200, 
-  action = function(pos, node) 
-      node.name = "hades_clothing:dirty_water_source";
-      minetest.set_node(pos, node);
-    end,
-});
+local function mixing_water(pos, node)
+  local pos1 = {x=pos.x-1,y=pos.y-1,z=pos.z-1};
+  local pos2 = {x=pos.x+1,y=pos.y+1,z=pos.z+1};
+  local look_for = {"hades_clothing:dirty_water_source","hades_core:water_source"};
+  local finds = minetest.find_nodes_in_area(pos1, pos2, look_for, true);
+  local sum = 0;
+  local nodes = {};
+  for key, found in pairs(finds) do
+    nodes[key] = table.getn(found);
+    sum = sum + nodes[key];
+  end
+  local num = sum;
+  if (sum>1) then
+    num = random_gen:next(1,sum);
+  end
+  --local num = random_gen:next(1,27)-27+sum;
+  if (num>1) then
+    for key,number in pairs(nodes) do
+      if (num<=number) then
+        if (node.name ~= key) then
+          node.name = key;
+          minetest.set_node(pos, node);
+        end
+        break;
+      end
+      num = num - number;
+    end
+  end
+end
 
 minetest.register_abm({
   label = "Mixing dirty water and water",
@@ -170,23 +178,15 @@ minetest.register_abm({
   neighbors = {"hades_core:water_source"},
   interval = 5,
   chance = 5, 
-  action = function(pos, node) 
-      node.name = "hades_core:water_source";
-      minetest.set_node(pos, node);
-    end,
+  action = mixing_water,
 });
 
---[[
 minetest.register_abm({
-  label = "Mixing dirty water and river water",
-  nodenames = {"hades_clothing:dirty_water_source"},
-  neighbors = {"hades_core:river_water_source"},
+  label = "Mixing water and dirty water",
+  nodenames = {"hades_core:water_source"},
+  neighbors = {"hades_clothing:dirty_water_source"},
   interval = 5,
   chance = 5, 
-  action = function(pos, node) 
-      node.name = "hades_core:river_water_source";
-      minetest.set_node(pos, node);
-    end,
+  action = mixing_water,
 });
---]]
 
