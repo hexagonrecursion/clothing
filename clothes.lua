@@ -74,15 +74,43 @@ for color, data in pairs(clothing.colors) do
 		groups = {clothing=1},
 	})
   
-  -- glove
-  local inv_img = "(clothing_inv_glove.png^[multiply:#"..data.hex..")";
-  local uv_img = "(clothing_uv_glove.png^[multiply:#"..data.hex..")";
+  -- right glove
+  local inv_img = "(clothing_inv_glove_right.png^[multiply:#"..data.hex..")";
+  local uv_img = "(clothing_uv_glove_right.png^[multiply:#"..data.hex..")";
   if data.hex2 then
-    inv_img = inv_img.."^(((clothing_inv_glove.png^clothing_inv_second_color.png)^[makealpha:0,0,0)^[multiply:#"..data.hex2..")";
-    uv_img = uv_img.."^(((clothing_uv_glove.png^clothing_uv_second_color.png)^[makealpha:0,0,0)^[multiply:#"..data.hex2..")";
+    inv_img = inv_img.."^(((clothing_inv_glove_right.png^clothing_inv_second_color.png)^[makealpha:0,0,0)^[multiply:#"..data.hex2..")";
+    uv_img = uv_img.."^(((clothing_uv_glove_right.png^clothing_uv_second_color.png)^[makealpha:0,0,0)^[multiply:#"..data.hex2..")";
   end
-	minetest.register_craftitem("clothing:glove_"..color, {
-		description = desc..S("cotton glove"),
+	minetest.register_craftitem("clothing:glove_right_"..color, {
+		description = desc..S("cotton right glove"),
+		inventory_image = inv_img,
+		uv_image = uv_img,
+		groups = {clothing=1},
+	})
+  
+  -- left glove
+  local inv_img = "(clothing_inv_glove_left.png^[multiply:#"..data.hex..")";
+  local uv_img = "(clothing_uv_glove_left.png^[multiply:#"..data.hex..")";
+  if data.hex2 then
+    inv_img = inv_img.."^(((clothing_inv_glove_left.png^clothing_inv_second_color.png)^[makealpha:0,0,0)^[multiply:#"..data.hex2..")";
+    uv_img = uv_img.."^(((clothing_uv_glove_left.png^clothing_uv_second_color.png)^[makealpha:0,0,0)^[multiply:#"..data.hex2..")";
+  end
+	minetest.register_craftitem("clothing:glove_left_"..color, {
+		description = desc..S("cotton left glove"),
+		inventory_image = inv_img,
+		uv_image = uv_img,
+		groups = {clothing=1},
+	})
+  
+  -- gloves
+  local inv_img = "(clothing_inv_gloves.png^[multiply:#"..data.hex..")";
+  local uv_img = "(clothing_uv_gloves.png^[multiply:#"..data.hex..")";
+  if data.hex2 then
+    inv_img = inv_img.."^(((clothing_inv_gloves.png^clothing_inv_second_color.png)^[makealpha:0,0,0)^[multiply:#"..data.hex2..")";
+    uv_img = uv_img.."^(((clothing_uv_gloves.png^clothing_uv_second_color.png)^[makealpha:0,0,0)^[multiply:#"..data.hex2..")";
+  end
+	minetest.register_craftitem("clothing:gloves_"..color, {
+		description = desc..S("cotton gloves"),
 		inventory_image = inv_img,
 		uv_image = uv_img,
 		groups = {clothing=1},
