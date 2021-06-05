@@ -27,7 +27,7 @@ for color, data in pairs(clothing.colors) do
   -- fabric
   local inv_img = "(clothing_fabric.png^[multiply:#"..data.hex..")";
   if data.hex2 then
-    inv_img = inv_img.."^(clothing_fabric_2.png^[multiply:#"..data.hex2..")";
+    inv_img = inv_img.."^(((clothing_fabric.png^clothing_inv_second_color.png)^[makealpha:0,0,0)^[multiply:#"..data.hex2..")";
   end
   minetest.register_craftitem("clothing:fabric_"..color, {
     description = desc..S("fabric"),
