@@ -88,6 +88,34 @@ for color, data in pairs(clothing.colors) do
 		groups = {clothing=1},
 	})
   
+  -- undershirt
+  local inv_img = "(clothing_inv_undershirt.png^[multiply:#"..data.hex..")";
+  local uv_img = "(clothing_uv_undershirt.png^[multiply:#"..data.hex..")";
+  if data.hex2 then
+    inv_img = inv_img.."^(((clothing_inv_undershirt.png^clothing_inv_second_color.png)^[makealpha:0,0,0)^[multiply:#"..data.hex2..")";
+    uv_img = uv_img.."^(((clothing_uv_undershirt.png^clothing_uv_second_color.png)^[makealpha:0,0,0)^[multiply:#"..data.hex2..")";
+  end
+	minetest.register_craftitem("clothing:undershirt_"..color, {
+		description = desc..S("cotton undershirt"),
+		inventory_image = inv_img,
+		uv_image = uv_img,
+		groups = {clothing=1},
+	})
+  
+  -- t-shirt short sleeve
+  local inv_img = "(clothing_inv_shortshirt.png^[multiply:#"..data.hex..")";
+  local uv_img = "(clothing_uv_shortshirt.png^[multiply:#"..data.hex..")";
+  if data.hex2 then
+    inv_img = inv_img.."^(((clothing_inv_shortshirt.png^clothing_inv_second_color.png)^[makealpha:0,0,0)^[multiply:#"..data.hex2..")";
+    uv_img = uv_img.."^(((clothing_uv_shortshirt.png^clothing_uv_second_color.png)^[makealpha:0,0,0)^[multiply:#"..data.hex2..")";
+  end
+	minetest.register_craftitem("clothing:shortshirt_"..color, {
+		description = desc..S("cotton short with short sleeve"),
+		inventory_image = inv_img,
+		uv_image = uv_img,
+		groups = {clothing=1},
+	})
+  
   -- shorts
   local inv_img = "(clothing_inv_shorts.png^[multiply:#"..data.hex..")";
   local uv_img = "(clothing_uv_shorts.png^[multiply:#"..data.hex..")";
