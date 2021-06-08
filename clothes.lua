@@ -31,19 +31,27 @@ for color, data in pairs(clothing.colors) do
   desc = desc.." ";
   
   -- clothes
-  -- hat
-  local inv_img = "(clothing_inv_hat.png^[multiply:#"..data.hex..")";
-  local uv_img = "(clothing_uv_hat.png^[multiply:#"..data.hex..")";
+  -- skullcap (old hat)
+  local inv_img = "(clothing_inv_skullcap.png^[multiply:#"..data.hex..")";
+  local uv_img = "(clothing_uv_skullcap.png^[multiply:#"..data.hex..")";
   if data.hex2 then
-    inv_img = inv_img.."^(((clothing_inv_hat.png^clothing_inv_second_color.png)^[makealpha:0,0,0)^[multiply:#"..data.hex2..")";
-    uv_img = uv_img.."^(((clothing_uv_hat.png^clothing_uv_second_color.png)^[makealpha:0,0,0)^[multiply:#"..data.hex2..")";
+    inv_img = inv_img.."^(((clothing_inv_skullcap.png^clothing_inv_second_color.png)^[makealpha:0,0,0)^[multiply:#"..data.hex2..")";
+    uv_img = uv_img.."^(((clothing_uv_skullcap.png^clothing_uv_second_color.png)^[makealpha:0,0,0)^[multiply:#"..data.hex2..")";
   end
-	minetest.register_craftitem("clothing:hat_"..color, {
-		description = desc..S("cotton hat"),
+	minetest.register_craftitem("clothing:skullcap_"..color, {
+		description = desc..S("cotton skullcap"),
 		inventory_image = inv_img,
 		uv_image = uv_img,
 		groups = {clothing=1},
+    
+    on_load = function(player, index, stack)
+      -- change old :hat item to :skullcap item
+      local count = stack:get_count()
+      stack:set_name("clothing:skullcap_"..color)
+      stack:set_count(count)
+    end,
 	})
+	minetest.register_alias("clothing:hat_"..color, "clothing:skullcap_"..color)
   -- t-shirt
   local inv_img = "(clothing_inv_shirt.png^[multiply:#"..data.hex..")";
   local uv_img = "(clothing_uv_shirt.png^[multiply:#"..data.hex..")";
