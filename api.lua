@@ -8,6 +8,7 @@ clothing = {
 		default.get_hotbar_bg(0,4.7),
 	registered_callbacks = {
 		on_update = {},
+		on_load = {},
 		on_equip = {},
 		on_unequip = {},
 	},
@@ -27,6 +28,12 @@ clothing.translator = minetest.get_translator("clothing");
 clothing.register_on_update = function(self, func)
 	if type(func) == "function" then
 		table.insert(self.registered_callbacks.on_update, func)
+	end
+end
+
+clothing.register_on_load = function(self, func)
+	if type(func) == "function" then
+		table.insert(self.registered_callbacks.on_load, func)
 	end
 end
 

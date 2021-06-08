@@ -115,6 +115,7 @@ local function load_clothing_metadata(player, clothing_inv)
 	clothing_inv:set_size("clothing", 6)
 	for i = 1, 6 do
 		clothing_inv:set_stack("clothing", i, clothes[i] or "")
+		clothing:run_callbacks("on_load", player, i, ItemStack(clothes[i]))
 	end
 
 	if dirty_meta then
