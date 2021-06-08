@@ -1,6 +1,30 @@
 
 local S = clothing.translator;
 
+local hood_mask_load = nil
+local hood_mask_equip = nil
+local hood_mask_unequip = nil
+
+if minetest.settings:get_bool("clothing_enable_hood_mask", true) then
+  local have_hidename = minetest.get_modpath("hidename")
+    
+  hood_mask_equip = function(player, index, stack)
+    player:set_nametag_attributes({color = {a = 0, r = 255, g = 255, b = 255}})
+  end
+  hood_mask_unequip = function (player, index, stack)
+    player:set_nametag_attributes({color = {a = 255, r = 255, g = 255, b = 255}})
+  end
+  if have_hidename then
+    hood_mask_equip = function(player, index, stack)
+      hidename.hide(player:get_player_name())
+    end
+    hood_mask_unequip = function(player, index, stack)
+      hidename.show(player:get_player_name())
+    end
+  end
+  hood_mask_load = hood_mask_equip
+end
+
 for color, data in pairs(clothing.colors) do
 	local desc = data.color;
   desc = desc:gsub("%a", string.upper, 1);
@@ -72,6 +96,9 @@ for color, data in pairs(clothing.colors) do
 		inventory_image = inv_img,
 		uv_image = uv_img,
 		groups = {clothing=1},
+    on_load = hood_mask_load,
+    on_equip = hood_mask_equip,
+    on_unequip = hood_mask_unequip,
 	})
   
   -- right glove

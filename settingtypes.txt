@@ -5,3 +5,6 @@ clothing_enable_craft (Enable clothing crafting) bool true
 # Enable clothes register when register craft is disabled
 clothing_register_clothes (Enable register clothes) bool true
 
+# Enable hood mask hide player nametag.
+clothing_enable_hood_mask (Enable hood mask player tag hide) bool true
+
