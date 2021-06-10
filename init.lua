@@ -2,6 +2,7 @@ local modpath = minetest.get_modpath(minetest.get_current_modname())
 
 dofile(modpath.."/api.lua")
 dofile(modpath.."/clothing.lua")
+dofile(modpath.."/character.lua")
 
 -- Inventory mod support
 

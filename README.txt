@@ -1,7 +1,7 @@
 Wool Clothing - Wool Clothing [WIP] [clothing]
 ==============================================
 
-Depends: multiskin
+Depends: skinsdb
 
 Recommends: sfinv, inventory_plus or unified_inventory (use only one)
 

@@ -20,6 +20,7 @@ clothing.have_farming = minetest.get_modpath("farming")~=nil;
 clothing.have_bonemeal = minetest.get_modpath("bonemeal")~=nil;
 clothing.have_skeletons = minetest.get_modpath("skeletons")~=nil;
 clothing.have_unified = minetest.get_modpath("unified_inventory")~=nil;
+clothing.have_skinsdb = minetest.get_modpath("skinsdb")~=nil;
 
 clothing.translator = minetest.get_translator("clothing");
 
