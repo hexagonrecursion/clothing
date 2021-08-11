@@ -144,9 +144,9 @@ for color, data in pairs(clothing.colors) do
   sewing_table:recipe_register_input(
     "",
     {
-      inputs = {fabric, yarn, fabric,
-                fabric, fabric, fabric,
-                fabric, fabric, fabric,
+      inputs = {fabric, "clothing:undershirt_"..color, fabric,
+                fabric, yarn, fabric,
+                "", "", "",
                },
       outputs = {{"hades_clothing:shirt_"..color,"hades_clothing:yarn_spool_empty"}},
       production_time = 60,
@@ -172,6 +172,72 @@ for color, data in pairs(clothing.colors) do
                },
       outputs = {{"hades_clothing:cape_"..color,"hades_clothing:yarn_spool_empty"}},
       production_time = 30,
+      consumption_step_size = 1,
+    });
+  sewing_table:recipe_register_input(
+    "",
+    {
+      inputs = {fabric, fabric, fabric,
+                "", fabric, "",
+                fabric, yarn, fabric,
+               },
+      outputs = {{"clothing:hood_mask_"..color,"clothing:yarn_spool_empty"}},
+      production_time = 45,
+      consumption_step_size = 1,
+    });
+  sewing_table:recipe_register_input(
+    "",
+    {
+      inputs = {fabric, yarn, "",
+                "", "", "",
+                "", "", "",
+               },
+      outputs = {{"clothing:glove_left_"..color,"clothing:yarn_spool_empty"}},
+      production_time = 30,
+      consumption_step_size = 1,
+    });
+  sewing_table:recipe_register_input(
+    "",
+    {
+      inputs = {yarn, fabric, "",
+                "", "", "",
+                "", "", "",
+               },
+      outputs = {{"clothing:glove_right_"..color,"clothing:yarn_spool_empty"}},
+      production_time = 30,
+      consumption_step_size = 1,
+    });
+  sewing_table:recipe_register_input(
+    "",
+    {
+      inputs = {fabric, "clothing:undershirt_"..color, fabric,
+                "", yarn, "",
+                "", "", "",
+               },
+      outputs = {{"clothing:shortshirt_"..color,"clothing:yarn_spool_empty"}},
+      production_time = 30,
+      consumption_step_size = 1,
+    });
+  sewing_table:recipe_register_input(
+    "",
+    {
+      inputs = {fabric, yarn, fabric,
+                fabric, fabric, fabric,
+                fabric, fabric, fabric,
+               },
+      outputs = {{"clothing:undershirt_"..color,"clothing:yarn_spool_empty"}},
+      production_time = 45,
+      consumption_step_size = 1,
+    });
+  sewing_table:recipe_register_input(
+    "",
+    {
+      inputs = {"", yarn, "",
+                fabric, fabric, fabric,
+                fabric, "", fabric,
+               },
+      outputs = {{"clothing:shorts_"..color,"clothing:yarn_spool_empty"}},
+      production_time = 45,
       consumption_step_size = 1,
     });
 

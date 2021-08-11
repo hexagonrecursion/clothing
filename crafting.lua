@@ -95,3 +95,20 @@ if minetest.registered_items["hades_extrafarming:hemp_fibre"] then
   
 end
 
+
+for color, data in pairs(clothing.colors) do
+  minetest.register_craft({
+    type = "shapeless",
+    output = "clothing:gloves_"..color,
+    recipe = {"clothing:glove_right_"..color,
+              "clothing:glove_left_"..color},
+  })
+  minetest.register_craft({
+    type = "shapeless",
+    output = "clothing:glove_right_"..color,
+    recipe = {"clothing:gloves_"..color},
+    replacements = {
+      {"clothing:gloves_"..color, "clothing:glove_left_"..color},
+    },
+  })
+end

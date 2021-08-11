@@ -8,6 +8,7 @@ clothing = {
 		default.get_hotbar_bg(0,4.7),
 	registered_callbacks = {
 		on_update = {},
+		on_load = {},
 		on_equip = {},
 		on_unequip = {},
 	},
@@ -19,6 +20,7 @@ clothing.have_farming = minetest.get_modpath("hades_extrafarming")~=nil;
 clothing.have_bonemeal = minetest.get_modpath("bonemeal")~=nil;
 clothing.have_skeletons = minetest.get_modpath("skeletons")~=nil;
 clothing.have_unified = minetest.get_modpath("unified_inventory")~=nil;
+clothing.have_skinsdb = minetest.get_modpath("hades_skinsdb")~=nil;
 
 clothing.translator = minetest.get_translator("clothing");
 
@@ -27,6 +29,12 @@ clothing.translator = minetest.get_translator("clothing");
 clothing.register_on_update = function(self, func)
 	if type(func) == "function" then
 		table.insert(self.registered_callbacks.on_update, func)
+	end
+end
+
+clothing.register_on_load = function(self, func)
+	if type(func) == "function" then
+		table.insert(self.registered_callbacks.on_load, func)
 	end
 end
 

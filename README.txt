@@ -1,7 +1,7 @@
 Wool Clothing - Wool Clothing [WIP] [clothing]
 ==============================================
 
-Depends: multiskin
+Depends: skinsdb
 
 Recommends: sfinv, inventory_plus or unified_inventory (use only one)
 
@@ -91,14 +91,16 @@ Sewing
     +--------+------------+--------+
     | fabric | yarn spool | fabric |
     +--------+------------+--------+
+    +        +            +        +
+    +--------+------------+--------+
   
   Shirt
     +--------+------------+--------+
+    | fabric | undershirt | fabric |
+    +--------+------------+--------+
     | fabric | yarn spool | fabric |
     +--------+------------+--------+
-    | fabric |   fabric   | fabric |
-    +--------+------------+--------+
-    | fabric |   fabric   | fabric |
+    +        +            +        +
     +--------+------------+--------+
   
   Pants
@@ -118,6 +120,58 @@ Sewing
     +--------+--------+------------+
     | fabric | fabric |            |
     +--------+--------+------------+
+  
+  Hood mask
+    +--------+------------+--------+
+    | fabric |   fabric   | fabric |
+    +--------+------------+--------+
+    |        |   fabric   |        |
+    +--------+------------+--------+
+    | fabric | yarn spool | fabric |
+    +--------+------------+--------+
+  
+  Right glove
+    +------------+--------+-+
+    | yarn spool | fabric | |
+    +------------+--------+-+
+    +            +        + |
+    +------------+--------+-+
+    +            +        + |
+    +------------+--------+-+
+  
+  Left glove
+    +--------+------------+-+
+    | fabric | yarn spool | |
+    +--------+------------+-+
+    +        +            + |
+    +--------+------------+-+
+    +        +            + |
+    +--------+------------+-+
+  
+  Shirt with short sleeve (shortshirt)
+    +--------+------------+--------+
+    | fabric | undershirt | fabric |
+    +--------+------------+--------+
+    |        | yarn spool |        |
+    +--------+------------+--------+
+  
+  Undershirt
+    +--------+------------+--------+
+    | fabric | yarn spool | fabric |
+    +--------+------------+--------+
+    | fabric |   fabric   | fabric |
+    +--------+------------+--------+
+    | fabric |   fabric   | fabric |
+    +--------+------------+--------+
+  
+  Shorts
+    +--------+------------+--------+
+    |        | yarn spool |        |
+    +--------+------------+--------+
+    | fabric |   fabric   | fabric |
+    +--------+------------+--------+
+    | fabric |            | fabric |
+    +--------+------------+--------+
   
   Pictures
     - pictures for shirt or cape
