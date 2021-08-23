@@ -47,7 +47,7 @@ function sewing_table:get_formspec(meta, production_percent, consumption_percent
   local formspec =  "formspec_version[3]" .. "size[12.75,9.5]" ..
                     "background[-1.25,-1.25;15,11;appliances_appliance_formspec.png]" ..
                     progress..
-                    "list[current_player;main;1.5,4;8,4;]" ..
+                    "list[current_player;main;0.25,4;10,4;]" ..
                     "list[context;input;1,0;3,3;]" ..
                     "list[context;output;9.75,0.75;2,2;]" ..
                     "listring[current_player;main]" ..
