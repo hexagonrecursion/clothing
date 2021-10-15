@@ -205,18 +205,24 @@ for color, data in pairs(clothing.basic_colors) do
         output_stack_size = 1,
         have_usage = false,
         
-        need_water = false,
-        power_data = {
-          ["time"] = {
-              run_speed = 1,
-            },
+        sounds = {
+          running = {
+            sound = "clothing_dye_machine_running",
+            sound_param = {max_hear_distance = 8, gain = 1},
+            repeat_timer = 0,
+          },
         },
-        
-        have_tubes = false,
       }
     );
 
   local dye_machine = clothing[dye_machine_key];
+
+  dye_machine:power_data_register(
+    {
+      ["time_power"] = {
+          run_speed = 1,
+        },
+    })
   
   --------------
   -- Formspec --
@@ -266,14 +272,14 @@ for color, data in pairs(clothing.basic_colors) do
     return can_put;
   end
 
-  function dye_machine:after_timer_step(pos, meta, inv, production_time)
-    local use_input, use_usage = self:recipe_aviable_input(inv)
+  function dye_machine:after_timer_step(timer_step)
+    local use_input, use_usage = self:recipe_aviable_input(timer_step.inv)
     if use_input then
-      self:running(pos, meta);
+      self:running(timer_step.pos, timer_step.meta);
       return true
     else
-      self:deactivate(pos, meta);
-      local node = minetest.get_node(pos);
+      self:deactivate(timer_step.pos, timer_step.meta);
+      local node = minetest.get_node(timer_step.pos);
     
       local formspec =  "formspec_version[3]" .. "size[12.75,8.5]" ..
                         "background[-1.25,-1.25;15,10;appliances_appliance_formspec.png]" ..
@@ -282,10 +288,10 @@ for color, data in pairs(clothing.basic_colors) do
                         "listring[current_player;main]" ..
                         "listring[context;"..self.output_stack.."]";
       
-      meta:set_string("infotext", S("Dye machine with dirty water"));
-      meta:set_string("formspec", formspec);
+      timer_step.meta:set_string("infotext", S("Dye machine with dirty water"));
+      timer_step.meta:set_string("formspec", formspec);
       node.name = "clothing:dye_machine_water_dirty"
-      minetest.swap_node(pos, node);
+      minetest.swap_node(timer_step.pos, timer_step.node);
       return false
     end
   end

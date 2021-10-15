@@ -18,19 +18,24 @@ clothing.loom = appliances.appliance:new(
       use_stack_size = 0,
       have_usage = false,
       
-      
-      need_water = false,
-      power_data = {
-        ["punch"] = {
-            run_speed = 1,
-          },
+      sounds = {
+        running = {
+          sound = "clothing_loom_running",
+          sound_param = {max_hear_distance = 8, gain = 1},
+          repeat_timer = 0,
+        },
       },
-      
-      have_tubes = false,
     }
   );
 
 local loom = clothing.loom;
+
+loom:power_data_register(
+  {
+    ["punch_power"] = {
+        run_speed = 1,
+      },
+  })
 
 --------------
 -- Formspec --
