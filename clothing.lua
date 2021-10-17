@@ -14,7 +14,7 @@ if (minetest.settings:get_bool("clothing_enable_craft", true) == false) then
   end
   return
 else
-  if (minetest.get_modpath("hades_appliances")==nil) then
+  if (minetest.get_modpath("appliances")==nil) then
     error("Cannot register clothes and machines because of missing mod appliances. Please install mod appliances or disable register of clothes and machines by disabling clothing_enable_craft in settings (aviable from Minetest main menu).")
 	  return
   end
