@@ -17,20 +17,17 @@ clothing.sewing_table = appliances.appliance:new(
       use_stack = "input",
       use_stack_size = 0,
       have_usage = false,
-      
-      
-      need_water = false,
-      power_data = {
-        ["punch"] = {
-            run_speed = 1,
-          },
-      },
-      
-      have_tubes = false,
     }
   );
 
 local sewing_table = clothing.sewing_table;
+
+sewing_table:power_data_register(
+  {
+    ["punch_power"] = {
+        run_speed = 1,
+      },
+  })
 
 --------------
 -- Formspec --

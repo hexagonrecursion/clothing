@@ -11,19 +11,24 @@ clothing.spinning_machine = appliances.appliance:new(
       node_help = S("Fill yarn empty spool by yarn.").."\n"..
                   S("Powered by punching."),
       
-      need_water = false,
-      
-      power_data = {
-        ["punch"] = {
-            run_speed = 1,
-          },
+      sounds = {
+        running = {
+          sound = "clothing_spinning_machine_running",
+          sound_param = {max_hear_distance = 8, gain = 1},
+          repeat_timer = 0,
+        },
       },
-      
-      have_tubes = false,
     }
   );
 
 local spinning_machine = clothing.spinning_machine;
+
+spinning_machine:power_data_register(
+  {
+    ["punch_power"] = {
+        run_speed = 1,
+      },
+  })
 
 --------------
 -- Formspec --
