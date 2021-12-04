@@ -43,6 +43,7 @@ spinning_machine:power_data_register(
 ----------
 
 local node_def = {
+    paramtype1 = "light",
     paramtype2 = "facedir",
     groups = {cracky = 2,},
     legacy_facedir_simple = true,
