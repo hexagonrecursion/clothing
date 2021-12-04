@@ -62,6 +62,7 @@ minetest.register_craft({
 	},
 })
 
+--[[
 if clothing.have_farming then
   minetest.clear_craft({
     --output = "hades_extrafarming:string 2"
@@ -82,6 +83,7 @@ if clothing.have_farming then
     },
   })
 end
+--]]
 
 if minetest.registered_items["hades_extrafarming:hemp_fibre"] then
   minetest.clear_craft({

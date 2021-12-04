@@ -290,7 +290,7 @@ for color, data in pairs(clothing.basic_colors) do
       timer_step.meta:set_string("infotext", S("Dye machine with dirty water"));
       timer_step.meta:set_string("formspec", formspec);
       node.name = "hades_clothing:dye_machine_water_dirty"
-      minetest.swap_node(timer_step.pos, timer_step.node);
+      minetest.swap_node(timer_step.pos, node);
       return false
     end
   end
@@ -300,6 +300,7 @@ for color, data in pairs(clothing.basic_colors) do
   ----------
 
   local node_def = {
+      paramtype1 = "light",
       paramtype2 = "facedir",
       groups = {cracky = 2, not_in_creative_inventory = 1},
       legacy_facedir_simple = true,
