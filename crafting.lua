@@ -3,7 +3,7 @@ minetest.register_craft({
 	output = 'hades_clothing:yarn_spool_empty',
 	recipe = {
 		{'group:stick'},
-		{'group:wood'},
+		{'stairs:slab_wood'},
 	},
 })
 
