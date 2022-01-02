@@ -366,7 +366,9 @@ for color, data in pairs(clothing.basic_colors) do
       consumption_step_size = 1,
     });
   
-  dye_machine:register_recipes("clothing_dying", "")
+  minetest.register_on_mods_loaded( function ()
+    dye_machine:register_recipes("clothing_dying", "")
+  end)
 end
 
 

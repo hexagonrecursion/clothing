@@ -201,5 +201,7 @@ for color, hex in pairs(clothing.colors) do
   end
 end
 
-spinning_machine:register_recipes("clothing_spinning", "clothing_spinning_use")
+minetest.register_on_mods_loaded( function ()
+  spinning_machine:register_recipes("clothing_spinning", "clothing_spinning_use")
+end)
 
