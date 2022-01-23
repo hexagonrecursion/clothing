@@ -282,7 +282,5 @@ for color, data in pairs(clothing.colors) do
   end
 end
 
-minetest.register_on_mods_loaded( function ()
-  sewing_table:register_recipes("clothing_sewing", "")
-end)
+sewing_table:register_recipes("clothing_sewing", "")
 

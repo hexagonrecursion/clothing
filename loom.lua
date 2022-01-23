@@ -187,9 +187,7 @@ for color, data in pairs(clothing.colors) do
   end
 end
 
-minetest.register_on_mods_loaded( function ()
-  loom:register_recipes("clothing_weaving", "")
-end)
+loom:register_recipes("clothing_weaving", "")
 
 minetest.register_lbm({
     label = "Upgrade old clothing loom.",
