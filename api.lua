@@ -1,10 +1,10 @@
 clothing = {
-	formspec = "size[8,8.5]"..
+	formspec = "size[10,8.5]"..
 		default.gui_bg..
 		default.gui_bg_img..
 		default.gui_slots..
-		"list[current_player;main;0,4.7;8,1;]"..
-		"list[current_player;main;0,5.85;8,3;8]"..
+		"list[current_player;main;0,4.7;10,1;]"..
+		"list[current_player;main;0,5.85;10,3;10]"..
 		default.get_hotbar_bg(0,4.7),
 	registered_callbacks = {
 		on_update = {},

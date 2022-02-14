@@ -142,7 +142,7 @@ for color, data in pairs(clothing.colors) do
   sewing_table:recipe_register_input(
     "",
     {
-      inputs = {fabric, "clothing:undershirt_"..color, fabric,
+      inputs = {fabric, "hades_clothing:undershirt_"..color, fabric,
                 fabric, yarn, fabric,
                 "", "", "",
                },
@@ -179,7 +179,7 @@ for color, data in pairs(clothing.colors) do
                 "", fabric, "",
                 fabric, yarn, fabric,
                },
-      outputs = {{"clothing:hood_mask_"..color,"clothing:yarn_spool_empty"}},
+      outputs = {{"hades_clothing:hood_mask_"..color,"hades_clothing:yarn_spool_empty"}},
       production_time = 45,
       consumption_step_size = 1,
     });
@@ -190,7 +190,7 @@ for color, data in pairs(clothing.colors) do
                 "", "", "",
                 "", "", "",
                },
-      outputs = {{"clothing:glove_left_"..color,"clothing:yarn_spool_empty"}},
+      outputs = {{"hades_clothing:glove_left_"..color,"hades_clothing:yarn_spool_empty"}},
       production_time = 30,
       consumption_step_size = 1,
     });
@@ -201,18 +201,18 @@ for color, data in pairs(clothing.colors) do
                 "", "", "",
                 "", "", "",
                },
-      outputs = {{"clothing:glove_right_"..color,"clothing:yarn_spool_empty"}},
+      outputs = {{"hades_clothing:glove_right_"..color,"hades_clothing:yarn_spool_empty"}},
       production_time = 30,
       consumption_step_size = 1,
     });
   sewing_table:recipe_register_input(
     "",
     {
-      inputs = {fabric, "clothing:undershirt_"..color, fabric,
+      inputs = {fabric, "hades_clothing:undershirt_"..color, fabric,
                 "", yarn, "",
                 "", "", "",
                },
-      outputs = {{"clothing:shortshirt_"..color,"clothing:yarn_spool_empty"}},
+      outputs = {{"hades_clothing:shortshirt_"..color,"hades_clothing:yarn_spool_empty"}},
       production_time = 30,
       consumption_step_size = 1,
     });
@@ -223,7 +223,7 @@ for color, data in pairs(clothing.colors) do
                 fabric, fabric, fabric,
                 fabric, fabric, fabric,
                },
-      outputs = {{"clothing:undershirt_"..color,"clothing:yarn_spool_empty"}},
+      outputs = {{"hades_clothing:undershirt_"..color,"hades_clothing:yarn_spool_empty"}},
       production_time = 45,
       consumption_step_size = 1,
     });
@@ -234,7 +234,7 @@ for color, data in pairs(clothing.colors) do
                 fabric, fabric, fabric,
                 fabric, "", fabric,
                },
-      outputs = {{"clothing:shorts_"..color,"clothing:yarn_spool_empty"}},
+      outputs = {{"hades_clothing:shorts_"..color,"hades_clothing:yarn_spool_empty"}},
       production_time = 45,
       consumption_step_size = 1,
     });
