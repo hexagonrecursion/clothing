@@ -65,6 +65,7 @@ minetest.register_node("hades_clothing:dye_machine_empty", {
                   S("Fill with water and dye.").."\n"..
                   S("Need time to colorize wool, fabric or yarn."),
     short_description = node_desc,
+    paramtype = "light",
     paramtype2 = "facedir",
     groups = {cracky = 2,},
     legacy_facedir_simple = true,
@@ -94,6 +95,7 @@ minetest.register_node("hades_clothing:dye_machine_empty", {
   })
 minetest.register_node("hades_clothing:dye_machine_water", {
     description = S("Dye machine filled with water"),
+    paramtype = "light",
     paramtype2 = "facedir",
     groups = {cracky = 2,},
     legacy_facedir_simple = true,
@@ -134,6 +136,7 @@ minetest.register_node("hades_clothing:dye_machine_water_dirty", {
     description = node_desc.."\n"..
                   S("Empty it by empty bucket."),
     short_description = node_desc,
+    paramtype = "light",
     paramtype2 = "facedir",
     groups = {cracky = 2,},
     legacy_facedir_simple = true,
@@ -300,7 +303,7 @@ for color, data in pairs(clothing.basic_colors) do
   ----------
 
   local node_def = {
-      paramtype1 = "light",
+      paramtype = "light",
       paramtype2 = "facedir",
       groups = {cracky = 2, not_in_creative_inventory = 1},
       legacy_facedir_simple = true,
