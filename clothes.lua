@@ -47,14 +47,14 @@ for color, data in pairs(clothing.colors) do
     on_load = function(player, index, stack)
       -- change old :hat item to :skullcap item
       local count = stack:get_count()
-      stack:set_name("clothing:skullcap_"..color)
+      stack:set_name("hades_clothing:skullcap_"..color)
       stack:set_count(count)
     end,
 	})
-	minetest.register_alias("clothing:hat_"..color, "clothing:skullcap_"..color)
+	minetest.register_alias("hades_clothing:hat_"..color, "hades_clothing:skullcap_"..color)
   if data.alias then
-	  minetest.register_alias("clothing:skullcap_"..data.alias, "clothing:skullcap_"..color)
-	  minetest.register_alias("clothing:hat_"..data.alias, "clothing:skullcap_"..color)
+	  minetest.register_alias("hades_clothing:skullcap_"..data.alias, "hades_clothing:skullcap_"..color)
+	  minetest.register_alias("hades_clothing:hat_"..data.alias, "hades_clothing:skullcap_"..color)
   end
   
   -- t-shirt
@@ -71,7 +71,7 @@ for color, data in pairs(clothing.colors) do
 		groups = {clothing=1},
 	})
   if data.alias then
-	  minetest.register_alias("clothing:shirt_"..data.alias, "clothing:shirt_"..color)
+	  minetest.register_alias("hades_clothing:shirt_"..data.alias, "hades_clothing:shirt_"..color)
   end
   
   -- pants
@@ -88,7 +88,7 @@ for color, data in pairs(clothing.colors) do
 		groups = {clothing=1},
 	})
   if data.alias then
-	  minetest.register_alias("clothing:pants_"..data.alias, "clothing:pants_"..color)
+	  minetest.register_alias("hades_clothing:pants_"..data.alias, "hades_clothing:pants_"..color)
   end
   
   -- cape
@@ -105,7 +105,7 @@ for color, data in pairs(clothing.colors) do
 		groups = {cape=1},
 	})
   if data.alias then
-	  minetest.register_alias("clothing:cape_"..data.alias, "clothing:cape_"..color)
+	  minetest.register_alias("hades_clothing:cape_"..data.alias, "hades_clothing:cape_"..color)
   end
   
   -- hood mask
@@ -125,7 +125,7 @@ for color, data in pairs(clothing.colors) do
     on_unequip = hood_mask_unequip,
 	})
   if data.alias then
-	  minetest.register_alias("clothing:hood_mask_"..data.alias, "clothing:hood_mask_"..color)
+	  minetest.register_alias("hades_clothing:hood_mask_"..data.alias, "hades_clothing:hood_mask_"..color)
   end
   
   -- right glove
@@ -142,7 +142,7 @@ for color, data in pairs(clothing.colors) do
 		groups = {clothing=1},
 	})
   if data.alias then
-	  minetest.register_alias("clothing:glove_right_"..data.alias, "clothing:glove_right_"..color)
+	  minetest.register_alias("hades_clothing:glove_right_"..data.alias, "hades_clothing:glove_right_"..color)
   end
   
   -- left glove
@@ -159,7 +159,7 @@ for color, data in pairs(clothing.colors) do
 		groups = {clothing=1},
 	})
   if data.alias then
-	  minetest.register_alias("clothing:glove_left_"..data.alias, "clothing:glove_left_"..color)
+	  minetest.register_alias("hades_clothing:glove_left_"..data.alias, "hades_clothing:glove_left_"..color)
   end
   
   -- gloves
@@ -176,7 +176,7 @@ for color, data in pairs(clothing.colors) do
 		groups = {clothing=1},
 	})
   if data.alias then
-	  minetest.register_alias("clothing:gloves_"..data.alias, "clothing:gloves_"..color)
+	  minetest.register_alias("hades_clothing:gloves_"..data.alias, "hades_clothing:gloves_"..color)
   end
   
   -- undershirt
@@ -193,7 +193,7 @@ for color, data in pairs(clothing.colors) do
 		groups = {clothing=1},
 	})
   if data.alias then
-	  minetest.register_alias("clothing:undershirt_"..data.alias, "clothing:undershirt_"..color)
+	  minetest.register_alias("hades_clothing:undershirt_"..data.alias, "hades_clothing:undershirt_"..color)
   end
   
   -- t-shirt short sleeve
@@ -210,7 +210,7 @@ for color, data in pairs(clothing.colors) do
 		groups = {clothing=1},
 	})
   if data.alias then
-	  minetest.register_alias("clothing:shortshirt_"..data.alias, "clothing:shortshirt_"..color)
+	  minetest.register_alias("hades_clothing:shortshirt_"..data.alias, "hades_clothing:shortshirt_"..color)
   end
   
   -- shorts
@@ -227,7 +227,7 @@ for color, data in pairs(clothing.colors) do
 		groups = {clothing=1},
 	})
   if data.alias then
-	  minetest.register_alias("clothing:shorts_"..data.alias, "clothing:shorts_"..color)
+	  minetest.register_alias("hades_clothing:shorts_"..data.alias, "hades_clothing:shorts_"..color)
   end
   
   
@@ -246,7 +246,7 @@ for color, data in pairs(clothing.colors) do
       groups = {clothing=1},
     })
     if data.alias then
-      minetest.register_alias("clothing:shirt_"..data.alias.."_picture_"..picture, "clothing:shirt_"..color.."_picture_"..picture)
+      minetest.register_alias("hades_clothing:shirt_"..data.alias.."_picture_"..picture, "hades_clothing:shirt_"..color.."_picture_"..picture)
     end
     
     -- cape
@@ -263,7 +263,7 @@ for color, data in pairs(clothing.colors) do
       groups = {cape=1},
     })
     if data.alias then
-      minetest.register_alias("clothing:cape_"..data.alias.."_picture_"..picture, "clothing:cape_"..color.."_picture_"..picture)
+      minetest.register_alias("hades_clothing:cape_"..data.alias.."_picture_"..picture, "hades_clothing:cape_"..color.."_picture_"..picture)
     end
   end
 end

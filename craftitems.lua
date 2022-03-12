@@ -34,7 +34,7 @@ for color, data in pairs(clothing.colors) do
     inventory_image = inv_img,
   });
   if data.alias then
-    minetest.register_alias("clothing:fabric_"..data.alias, "clothing:fabric_"..color)
+    minetest.register_alias("hades_clothing:fabric_"..data.alias, "hades_clothing:fabric_"..color)
   end
 end
 
