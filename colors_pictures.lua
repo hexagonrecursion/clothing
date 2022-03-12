@@ -74,6 +74,7 @@ for color, data in pairs(basic_colors) do
       key = color.."_"..color2;
       colors[key] = {
           color = data.color.."-"..data2.color;
+          alias = color2.."_"..color;
           color1 = data.color,
           color2 = data2.color,
           key1 = color,
