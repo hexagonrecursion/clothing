@@ -261,7 +261,11 @@ for color, data in pairs(clothing.basic_colors) do
     return false;
   end
   function dye_machine:cb_allow_metadata_inventory_put(pos, listname, index, stack, player)
-    local can_put = self:recipe_inventory_can_put(pos, listname, index, stack, player);
+    local player_name = nil
+    if player then
+      player_name = player:get_player_name()
+    end
+    local can_put = self:recipe_inventory_can_put(pos, listname, index, stack, player_name);
     if (can_put>0) then
       local meta = minetest.get_meta(pos);
       local inv = meta:get_inventory();
