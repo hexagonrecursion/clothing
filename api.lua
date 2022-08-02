@@ -15,7 +15,7 @@ clothing = {
 	player_textures = {},
 }
 
-clothing.have_wool = minetest.get_modpath("wool")~=nil;
+clothing.have_wool = minetest.get_modpath("hades_cloth")~=nil;
 clothing.have_farming = minetest.get_modpath("hades_extrafarming")~=nil;
 clothing.have_bonemeal = minetest.get_modpath("bonemeal")~=nil;
 clothing.have_skeletons = minetest.get_modpath("skeletons")~=nil;
